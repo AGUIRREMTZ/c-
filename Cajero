@@ -1,0 +1,72 @@
+Aquí te dejo un código en lenguaje C que simula un cajero automático:
+
+Código: Cajero Automático
+```
+#include <stdio.h>
+
+int main() {
+    int opcion, saldo = 1000;
+    float monto;
+
+    printf("Bienvenido al cajero automático\n");
+    printf("Su saldo actual es: $%d\n", saldo);
+
+    while (1) {
+        printf("Seleccione una opción:\n");
+        printf("1. Retirar dinero\n");
+        printf("2. Depositar dinero\n");
+        printf("3. Salir\n");
+        scanf("%d", &opcion);
+
+        switch (opcion) {
+            case 1:
+                printf("Ingrese el monto a retirar: $");
+                scanf("%f", &monto);
+                if (monto > saldo) {
+                    printf("No tiene suficiente saldo\n");
+                } else {
+                    saldo -= monto;
+                    printf("Su nuevo saldo es: $%d\n", saldo);
+                }
+                break;
+            case 2:
+                printf("Ingrese el monto a depositar: $");
+                scanf("%f", &monto);
+                saldo += monto;
+                printf("Su nuevo saldo es: $%d\n", saldo);
+                break;
+            case 3:
+                printf("Gracias por utilizar el cajero automático\n");
+                return 0;
+            default:
+                printf("Opción inválida\n");
+        }
+    }
+
+    return 0;
+}
+```
+
+Explicación del código
+1. *Inclusión de bibliotecas*: La línea `#include <stdio.h>` incluye la biblioteca estándar de entrada y salida (`stdio.h`) para utilizar las funciones `printf()` y `scanf()`.
+2. *Declaración de variables*: Se declaran las variables `opcion`, `saldo` y `monto` para almacenar la opción seleccionada, el saldo actual y el monto a retirar o depositar, respectivamente.
+3. *Menú principal*: Se imprime el menú principal con las opciones para retirar dinero, depositar dinero o salir.
+4. *Ciclo while*: Se utiliza un ciclo `while` para mantener el programa en ejecución hasta que el usuario seleccione la opción de salir.
+5. *Switch*: Se utiliza una sentencia `switch` para evaluar la opción seleccionada y ejecutar la acción correspondiente.
+
+Compilación y ejecución
+Para compilar y ejecutar el código, sigue los siguientes pasos:
+
+1. *Guarda el código en un archivo*: Guarda el código en un archivo con extensión `.c`, por ejemplo, `cajero.c`.
+2. *Compila el código*: Compila el código utilizando el comando `gcc` en la terminal o línea de comandos:
+```
+bash
+```
+gcc cajero.c -o cajero
+```
+3.  **Ejecuta el programa**: Ejecuta el programa utilizando el comando:
+    ```bash
+./cajero
+```
+```El programa imprimirá el menú principal y permitirá al usuario interactuar con él.
+```
