@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void ordenarBurbuja(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+    cout << "Ingresa la cantidad de elementos: ";
+    cin >> n;
+
+    vector<int> numeros(n);
+    cout << "Ingresa los elementos:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> numeros[i];
+    }
+
+    ordenarBurbuja(numeros);
+
+    cout << "Elementos ordenados: ";
+    for (int num : numeros) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
