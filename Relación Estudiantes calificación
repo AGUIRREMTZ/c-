@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <limits>
+using namespace std;
+
+struct Estudiante {
+    string nombre;
+    float promedio;
+};
+
+int main() {
+    int n;
+    cout << "Ingresa la cantidad de estudiantes: ";
+    cin >> n;
+
+    vector<Estudiante> estudiantes(n);
+    
+    for (int i = 0; i < n; ++i) {
+        cout << "Estudiante " << i + 1 << " nombre: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, estudiantes[i].nombre);
+        cout << "Promedio de " << estudiantes[i].nombre << ": ";
+        cin >> estudiantes[i].promedio;
+    }
+
+    Estudiante mejor = estudiantes[0];
+    for (int i = 1; i < n; ++i) {
+        if (estudiantes[i].promedio > mejor.promedio) {
+            mejor = estudiantes[i];
+        }
+    }
+
+    cout << "\nEl estudiante con el mejor promedio es: " << mejor.nombre << " con " << mejor.promedio << endl;
+
+    return 0;
+}
