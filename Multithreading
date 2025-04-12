@@ -1,0 +1,25 @@
+#include <iostream>
+#include <vector>
+#include <thread>
+#include <chrono>
+using namespace std;
+
+void imprimirRango(int inicio, int fin) {
+    for (int i = inicio; i <= fin; ++i) {
+        cout << "Hilo " << this_thread::get_id() << " imprime: " << i << endl;
+        this_thread::sleep_for(chrono::milliseconds(200));
+    }
+}
+
+int main() {
+    cout << "Iniciando hilos...\n";
+
+    thread hilo1(imprimirRango, 1, 5);
+    thread hilo2(imprimirRango, 6, 10);
+
+    hilo1.join();
+    hilo2.join();
+
+    cout << "\nTodos los hilos han finalizado." << endl;
+    return 0;
+}
