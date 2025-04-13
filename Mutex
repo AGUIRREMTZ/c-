@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <thread>
+#include <mutex>
+#include <chrono>
+using namespace std;
+
+mutex mtx;
+int contador = 0;
+
+void incrementarContador(const string& nombreHilo, int repeticiones) {
+    for (int i = 0; i < repeticiones; ++i) {
+        this_thread::sleep_for(chrono::milliseconds(100));
+        mtx.lock();
+        ++contador;
+        cout << nombreHilo << " incrementa contador a " << contador << endl;
+        mtx.unlock();
+    }
+}
+
+int main() {
+    cout << "Iniciando hilos con sincronización...\n";
+
+    thread hilo1(incrementarContador, "Hilo 1", 5);
+    thread hilo2(incrementarContador, "Hilo 2", 5);
+
+    hilo1.join();
+    hilo2.join();
+
+    cout << "\nValor final del contador: " << contador << endl;
+    return 0;
+}
