@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <memory>
+using namespace std;
+
+class Figura {
+public:
+    virtual double calcularArea() const = 0;
+    virtual void mostrar() const = 0;
+    virtual ~Figura() {}
+};
+
+class Circulo : public Figura {
+    double radio;
+public:
+    Circulo(double r) : radio(r) {}
+    double calcularArea() const override {
+        return 3.1416 * radio * radio;
+    }
+    void mostrar() const override {
+        cout << "Círculo con radio " << radio << ", Área: " << calcularArea() << endl;
+    }
+};
+
+class Rectangulo : public Figura {
+    double ancho, alto;
+public:
+    Rectangulo(double a, double h) : ancho(a), alto(h) {}
+    double calcularArea() const override {
+        return ancho * alto;
+    }
+    void mostrar() const override {
+        cout << "Rectángulo de " << ancho << "x" << alto << ", Área: " << calcularArea() << endl;
+    }
+};
+
+int main() {
+    vector<unique_ptr<Figura>> figuras;
+    figuras.push_back(make_unique<Circulo>(5.0));
+    figuras.push_back(make_unique<Rectangulo>(4.0, 6.0));
+
+    cout << "Mostrando figuras y sus áreas:\n";
+    for (const auto& figura : figuras) {
+        figura->mostrar();
+    }
+
+    return 0;
+}
