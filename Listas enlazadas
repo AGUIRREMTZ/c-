@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+// Nodo de una lista enlazada simple
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+    Nodo(int valor) : dato(valor), siguiente(nullptr) {}
+};
+
+// Clase Lista Enlazada
+class ListaEnlazada {
+private:
+    Nodo* cabeza;
+
+public:
+    ListaEnlazada() : cabeza(nullptr) {}
+
+    void insertarAlFinal(int valor) {
+        Nodo* nuevo = new Nodo(valor);
+        if (!cabeza) {
+            cabeza = nuevo;
+        } else {
+            Nodo* actual = cabeza;
+            while (actual->siguiente) {
+                actual = actual->siguiente;
+            }
+            actual->siguiente = nuevo;
+        }
+    }
+
+    void mostrar() const {
+        Nodo* actual = cabeza;
+        cout << "Lista: ";
+        while (actual) {
+            cout << actual->dato << " ";
+            actual = actual->siguiente;
+        }
+        cout << endl;
+    }
+
+    ~ListaEnlazada() {
+        Nodo* actual = cabeza;
+        while (actual) {
+            Nodo* temp = actual;
+            actual = actual->siguiente;
+            delete temp;
+        }
+    }
+};
+
+int main() {
+    ListaEnlazada lista;
+    lista.insertarAlFinal(10);
+    lista.insertarAlFinal(20);
+    lista.insertarAlFinal(30);
+
+    lista.mostrar();
+
+    return 0;
+}
