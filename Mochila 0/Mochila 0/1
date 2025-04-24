@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int mochila(int W, const vector<int>& pesos, const vector<int>& valores, int n) {
+    vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+
+    for (int i = 1; i <= n; ++i) {
+        for (int w = 0; w <= W; ++w) {
+            if (pesos[i - 1] <= w)
+                dp[i][w] = max(dp[i - 1][w], valores[i - 1] + dp[i - 1][w - pesos[i - 1]]);
+            else
+                dp[i][w] = dp[i - 1][w];
+        }
+    }
+
+    return dp[n][W];
+}
+
+int main() {
+    vector<int> pesos = {2, 3, 4, 5};
+    vector<int> valores = {3, 4, 5, 6};
+    int W = 5; // Capacidad de la mochila
+    int n = pesos.size();
+
+    int maxValor = mochila(W, pesos, valores, n);
+    cout << "Valor máximo que puede llevar la mochila: " << maxValor << endl;
+
+    return 0;
+}
